@@ -11,7 +11,23 @@
       </div>
       <div class="collapse navbar-collapse" id="tasklist-navbar">
         <ul class="nav navbar-nav navbar-right">
+          <% if logged_in? %>
+            <li><%= link_to 'タスク一覧', root_url %></li>
+          　<li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.name %> <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><%= link_to 'プロフィール', user_path(current_user) %></li>
+                <li role="separator" class="divider"></li>
+                <li><%= link_to 'ログアウト', logout_path, method: :delete %></li>
+              </ul>
+            </li>
+          <% else %>
           <li><%= link_to "タスクの送信", new_task_path %></li>
+          <li><%= link_to 'ログイン', login_path %></li>
+          <li><%= link_to 'ログアウト', logout_path, method: :delete %></li>
+          
+          <li><%= link_to 'Signup', signup_path %></li>
+          <% end %>
         </ul>
       </div>
     </div>

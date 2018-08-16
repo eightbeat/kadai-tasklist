@@ -1,9 +1,21 @@
+<% if logged_in? %>
+  <div class="row">
+    <aside class="col-md-4">
+     <%= form_for(@task) do |f| %>
+        <div class="form-group">
+         <%= f.text_area :content, class: 'form-control', rows: 3 %>
+        </div>
+        <%= f.submit '送信', class: 'btn btn-primary btn-block' %>
+      <% end %>
+    </aside>
+   <div class="col-xs-8">
+    <%= render 'tasks/tasks', tasks: @tasks %>
+   </div>
+  </div>
+<% else %>
+　<div class="center jumbotron">
+    <div class="text-center">
 <h1>タスク一覧</h1>
-
-<ul>
-  <% @tasks.each do |task| %>
-   <li><%= link_to task.id, task %> : <%= task.status %> &gt;<%= task.content %></li>
-  <% end %>
-</ul>
-
-<%= link_to "タスクの送信", new_task_path %>
+ 
+   <%= link_to 'Sign up now!', signup_path, class: 'btn btn-lg btn-primary' %> 
+ <% end %>
