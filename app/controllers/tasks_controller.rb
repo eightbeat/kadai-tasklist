@@ -3,7 +3,6 @@ class TasksController < ApplicationController
  before_action :correct_user, only: [:destroy]
 
  def index
-   @tasks = Task.all
   if logged_in?
    @user = current_user
    @task = current_user.tasks.build  # form_for 用
@@ -33,7 +32,7 @@ class TasksController < ApplicationController
  end
  
  def edit
-   @task = Task.find(params[:id])
+  @task = Task.find(params[:id])
  end
  
  def update

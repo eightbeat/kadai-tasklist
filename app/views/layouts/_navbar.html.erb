@@ -22,10 +22,7 @@
               </ul>
             </li>
           <% else %>
-          <li><%= link_to "タスクの送信", new_task_path %></li>
           <li><%= link_to 'ログイン', login_path %></li>
-          <li><%= link_to 'ログアウト', logout_path, method: :delete %></li>
-          
           <li><%= link_to 'Signup', signup_path %></li>
           <% end %>
         </ul>
