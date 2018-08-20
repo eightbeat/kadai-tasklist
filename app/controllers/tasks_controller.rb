@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
  before_action :require_user_logged_in
- before_action :correct_user, only: [:create,:show,:edit,:destroy]
+ before_action :correct_user, only: [:show,:edit,:destroy]
 
  def index
   if logged_in?
@@ -15,18 +15,17 @@ class TasksController < ApplicationController
  end
  
  def new
-  @task = Task.new
+  @task = current_user.tasks.build
  end
  
  def create
- 
-   @task = current_user.tasks.build (task_params)
+  @task = current_user.tasks.build (task_params)
    if @task.save
       flash[:success] = "Task が送信されました"
       redirect_to root_url
-    else
+   else
       @tasks = current_user.tasks.order('created_at DESC').page(params[:page])
-      flash.now[:danger] = '"Task が送信されませんでした"'
+      flash.now[:danger] = "Task が送信されませんでした"
       render 'new'
    end
  end
